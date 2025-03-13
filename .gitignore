@@ -1,0 +1,15 @@
+# Ignorar todos los archivos con extensión .txt
+*.txt
+
+# Ignorar todos los archivos sin extensión
+/*
+!*.*
+
+# Ignorar archivos con extensión .o
+*.o
+
+# Ignorar archivos con extensión .out
+*.out
+
+# Ignorar la carpeta .vscode en cualquier nivel del repositorio
+.vscode/
