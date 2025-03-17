@@ -34,7 +34,13 @@ void logMessage(string message, int severityLevel) {
 
 void logMessage(string message, string fileName, int errorLine){
   ofstream logFile("logtext.txt", ios::app);
-  logFile << "ERROR: in file \""<< fileName << "\", line " << errorLine << " -" << message;
+  logFile << "ERROR: in file \""<< fileName << "\", line " << errorLine << " -" << message << endl;
+  logFile.close();
+}
+
+void logMessage(string message, string userName){
+  ofstream logFile("logtext.txt", ios::app);
+  logFile << "[SECURITY] "<< message << " user: " << userName << endl;
   logFile.close();
 }
 
@@ -55,13 +61,28 @@ int main() {
 
     logMessage(message, severity);
 
-    cout<<endl<<"Desea continuar loggeando? 1(YES)/0(NO)";
+    cout<<endl<<"Desea continuar registrando? 1(YES)/0(NO)";
     cin >> logging;
     if(logging != 1){
       logging = 0; //si se ingresa algo distinto de 1 se cierra el loop
     }
-    cout<<endl;
   }
 
+  cout<<endl<<"Se imprimirá en el log un mensaje de error en archivo.genial"<<endl;
+  
+  logMessage("Este mensaje es para probar el log de error en archivos", "archivo.genial", 44);
+  
+  cout<<endl<<"Se imprimirá en el log un mensaje de seguridad"<<endl;
+
+  logMessage("Access Denied", "Octavio_Romagnoli");
+
+  try {
+    cout << endl << "Ocurrirá un error en runtime y se logueará con logMessage" << endl;
+    throw runtime_error("ARCHIVO INEXISTENTE");
+  } catch (exception& e) {
+      logMessage(e.what(), __FILE__, __LINE__);
+      return 1;
+    }
+  
   return 0;
 }
