@@ -32,6 +32,12 @@ void logMessage(string message, int severityLevel) {
   logFile.close();
 }
 
+void logMessage(string message, string fileName, int errorLine){
+  ofstream logFile("logtext.txt", ios::app);
+  logFile << "ERROR: in file \""<< fileName << "\", line " << errorLine << " -" << message;
+  logFile.close();
+}
+
 int main() {
   enum logTag {DEBUG, INFO, WARNING, ERROR, CRITICAL, EXTRA};
 
@@ -51,6 +57,9 @@ int main() {
 
     cout<<endl<<"Desea continuar loggeando? 1(YES)/0(NO)";
     cin >> logging;
+    if(logging != 1){
+      logging = 0; //si se ingresa algo distinto de 1 se cierra el loop
+    }
     cout<<endl;
   }
 
