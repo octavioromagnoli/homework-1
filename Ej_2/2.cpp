@@ -2,27 +2,30 @@
 using namespace std;
 #include <fstream>
 
-void logMessage(string message, int severityLevel) {
+enum class logTag { DEBUG, INFO, WARNING, ERROR, CRITICAL, EXTRA };
+
+
+void logMessage(string message, logTag severityLevel) {
   ofstream logFile("logtext.txt", ios::app);
   string severityName;
 
   switch (severityLevel) {
-    case 0:
+    case logTag::DEBUG:
       severityName = "DEBUG";
       break;
-    case 1:
+    case logTag::INFO:
       severityName = "INFO";
       break;
-    case 2:
+    case logTag::WARNING:
       severityName = "WARNING";
       break;
-    case 3:
+    case logTag::ERROR:
       severityName = "ERROR";
       break;
-    case 4:
+    case logTag::CRITICAL:
       severityName = "CRITICAL";
       break;
-    case 5:
+    case logTag::EXTRA:
       severityName = "EXTRA";
       break;
   }
@@ -45,23 +48,30 @@ void logMessage(string message, string userName){
 }
 
 int main() {
-  enum logTag {DEBUG, INFO, WARNING, ERROR, CRITICAL, EXTRA};
-
   int severity;
   string message;
   int logging = 1;
 
   while(logging){
-    cout << "Ingrese el nivel de severidad del mensaje (0: DEBUG, 1: INFO, 2: WARNING, 3: ERROR, 4: CRITICAL, 5: EXTRA): ";
+    cout << "Ingrese el nivel de severidad del mensaje (0: DEBUG, 1: INFO, 2: WARNING, 3: ERROR, 4: CRITICAL, 5: EXTRA): "<<endl;
+
     cin >> severity;
+    if (cin.fail()){
+      logMessage("Se ingresó un nivel de seguridad invalido, se espera valor de tipo int", logTag::ERROR);
+      throw runtime_error("ERROR, nivel de seguridad invalido (revisar log)");
+    };
+    if(severity > 5 || severity < 0){
+      cout << "Valor invalido, se continuará con la etiqueta DEBUG"<<endl; //Decisión arbitraria de diseño
+      severity = 0;
+    }
     cin.ignore(); // Limpia el buffer de cin para poder ingresar el mensaje despues  
 
     cout << "Ingrese el mensaje a logear: ";
     getline(cin, message);
 
-    logMessage(message, severity);
+    logMessage(message, static_cast<logTag>(severity));
 
-    cout<<endl<<"Desea continuar registrando? 1(YES)/0(NO)";
+    cout<<"Desea continuar registrando? 1(YES)/0(NO)";
     cin >> logging;
     if(logging != 1){
       logging = 0; //si se ingresa algo distinto de 1 se cierra el loop
@@ -82,7 +92,7 @@ int main() {
   } catch (exception& e) {
       logMessage(e.what(), __FILE__, __LINE__);
       return 1;
-    }
+  }
   
   return 0;
 }
