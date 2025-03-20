@@ -64,6 +64,27 @@ void insert(shared_ptr<Node>& head, int position, int value = 0){
   return;
 }
 
+void erase(shared_ptr<Node>&head,int position){
+  if(position == 0){
+    head = head->next;
+  }
+  shared_ptr<Node> iterator = head;
+  shared_ptr<Node> parent = iterator;
+  int i = 0;
+  while(iterator->next){
+    if(++i == position){
+      iterator->next = iterator->next->next;
+      return;
+    }
+    parent = iterator;
+    iterator = iterator->next;
+  }
+  cout<<"La posición excede el largo de la lista, por lo que se eliminará el nodo del final";
+  iterator = nullptr;
+  parent->next = parent->next->next;
+  return;
+}
+
 int main() {
   return 0;
 }
