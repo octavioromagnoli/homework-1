@@ -85,6 +85,15 @@ void erase(shared_ptr<Node>&head,int position){
   return;
 }
 
+void print_list(shared_ptr<Node>& head){
+  shared_ptr<Node> iterator = head;
+  while(iterator){
+    cout<<"[ "<<iterator->value<<" ] -> ";
+  }
+  cout<<" END";
+  return;
+}
+
 int main() {
   return 0;
 }
