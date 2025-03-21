@@ -55,6 +55,10 @@ int main() {
   return 0;
 }
 
+/* Aprovecho la sobrecarga de funciones para poder usar logMessage() en todos los casos, así
+  el compilador decide que declaración utilizar según los parámetros que se le pasan.
+*/
+
 void logMessage(string message, logTag severityLevel) {
   ofstream logFile("logtext.txt", ios::app);
   string severityName;
@@ -62,6 +66,7 @@ void logMessage(string message, logTag severityLevel) {
     cerr << "Error: no se pudo abrir el archivo de log." << endl;
     return;
   }
+  //Se asigna el tag de mensaje segun el severityLevel dado
   switch (severityLevel) {
     case logTag::DEBUG:
       severityName = "DEBUG";
