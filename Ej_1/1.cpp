@@ -2,16 +2,20 @@
 using namespace std;
 
 int** create_matrix(const int n){
-  int** matrix = new int*[n];
-
-  int count = 1;
-  for (int i = 0; i < n; i++){
-    matrix[i] = new int[n];
-    for (int j =0; j < n; j++){
-      matrix[i][j] = count++;
+  try{
+    int** matrix = new int*[n];
+    int count = 1;
+    for (int i = 0; i < n; i++){
+      matrix[i] = new int[n];
+      for (int j =0; j < n; j++){
+        matrix[i][j] = count++;
+      }
     }
+    return matrix;
+  } catch(const bad_alloc& e){
+    cerr << "Error al alocar memoria" << e.what() << endl;
+    exit(EXIT_FAILURE); 
   }
-  return matrix;
 }
 
 void print_matrix(int** matrix, int n){
