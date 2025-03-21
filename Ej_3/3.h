@@ -1,5 +1,5 @@
-#ifndef NODE_LIST_H
-#define NODE_LIST_H
+#ifndef THREE_H
+#define THREE_H
 
 #include <memory>
 using namespace std;

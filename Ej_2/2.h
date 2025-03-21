@@ -1,5 +1,5 @@
-#ifndef LOGGING_H
-#define LOGGING_H
+#ifndef TWO_H
+#define TWO_H
 
 #include <string>
 using namespace std;
