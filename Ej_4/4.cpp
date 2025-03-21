@@ -2,7 +2,7 @@
 #include <chrono>
 using namespace std;
 
-
+// Función recursiva que compara dos cadenas de texto
 constexpr bool are_equal(const char* s1,const char* s2){
   //Si se llega al final de ambas cadenas sin retornar false, son iguales
   // (las cadenas terminan con valor falsy '\0')
