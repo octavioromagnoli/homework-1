@@ -1,7 +1,6 @@
 # homework-1 Octavio Romagnoli
 
-Todas las declaraciones de funciones estan documentadas en sus declaraciones,
-por lo que en VScode, hacer hover sobre cualquier llamada a función muestra su documentación.
+Todas las declaraciones de funciones estan documentadas en sus declaraciones. En VScode, hacer hover sobre cualquier llamada a la función muestra su documentación.
 
 ## Cómo ejecutar los ejercicios con makefile
 
