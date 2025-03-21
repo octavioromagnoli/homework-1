@@ -12,6 +12,8 @@ int main() {
     cout << "Ingrese el nivel de severidad del mensaje (0: DEBUG, 1: INFO, 2: WARNING, 3: ERROR, 4: CRITICAL, 5: EXTRA): "<<endl;
 
     cin >> severity;
+    /* Ejemplo realista de uso de logMessage, si el usuario no sigue las instrucciones e ingresa 
+     valores erroneos ("asjfid", por ejemplo) el programa termina en error y se registra en logmessage*/
     if (cin.fail()){
       logMessage("Se ingresó un nivel de seguridad invalido, se espera valor de tipo int", logTag::ERROR);
       throw runtime_error("ERROR, nivel de seguridad invalido (revisar log)");
@@ -56,7 +58,10 @@ int main() {
 void logMessage(string message, logTag severityLevel) {
   ofstream logFile("logtext.txt", ios::app);
   string severityName;
-
+  if (!logFile.is_open()) {
+    cerr << "Error: no se pudo abrir el archivo de log." << endl;
+    return;
+  }
   switch (severityLevel) {
     case logTag::DEBUG:
       severityName = "DEBUG";
@@ -85,12 +90,20 @@ void logMessage(string message, logTag severityLevel) {
 
 void logMessage(string message, string fileName, int errorLine){
   ofstream logFile("logtext.txt", ios::app);
+  if (!logFile.is_open()) {
+    cerr << "Error: no se pudo abrir el archivo de log." << endl;
+    return;
+  }
   logFile << "ERROR: in file \""<< fileName << "\", line " << errorLine << " -" << message << endl;
   logFile.close();
 }
 
 void logMessage(string message, string userName){
   ofstream logFile("logtext.txt", ios::app);
+  if (!logFile.is_open()) {
+    cerr << "Error: no se pudo abrir el archivo de log." << endl;
+    return;
+  }
   logFile << "[SECURITY] "<< message << " user: " << userName << endl;
   logFile.close();
 }
