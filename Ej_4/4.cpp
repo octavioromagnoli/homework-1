@@ -19,6 +19,8 @@ constexpr bool are_equal(const char* s1,const char* s2){
 procesos de gestión de memoria subyacentes al objeto string*/
 
 int main() {
+  cout<<"### EJERCICIO 4 ### \n ";
+
   constexpr const char* str1 = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890a";
   constexpr const char* str2 = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890a";
   constexpr const char* str3 = "abcdefghijklmnopqrstuv-DIFERENTE-HIJKLMNOPQRSTUVWXYZ1234567890a";
@@ -40,8 +42,8 @@ int main() {
   cout << "A are_equal (distintos) le tomó: " << elapsedTime2.count() << " nanosegundos" << endl;  
   
 
-  cout << "Are str1 and str2 equal? " << (prueba1 ? "Yes" : "No") << endl;
-  cout << "Are str2 and str3 equal? " << (prueba2 ? "Yes" : "No") << endl;
+  cout << "Son iguales str1 y str2? " << (prueba1 ? "Si" : "No") << endl;
+  cout << "Son iguale str2 y str3? " << (prueba2 ? "Si" : "No") << endl;
   
   return 0;
 }  

@@ -4,6 +4,7 @@ using namespace std;
 #include <fstream>
 
 int main() {
+  cout<<"### EJERCICIO 2 ### \n ";
   int severity;
   string message;
   int logging = 1;
